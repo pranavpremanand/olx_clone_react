@@ -8,12 +8,12 @@ import Login from './Pages/Login'
  */
 import Home from "./Pages/Home";
 import { AuthContext, FirebaseContext } from "./store/Context";
+import Create from "./Components/Create/Create";
 
 function App() {
   const {setUser} = useContext(AuthContext);
   const {firebase} = useContext(FirebaseContext);
   useEffect(()=>{
-console.log('HELLO')
     firebase.auth().onAuthStateChanged((user)=>{
       setUser(user)
     })
@@ -29,6 +29,9 @@ console.log('HELLO')
         </Route>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/create">
+          <Create />
         </Route>
       </Router>
     </div>

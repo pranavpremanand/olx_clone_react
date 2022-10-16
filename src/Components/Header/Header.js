@@ -1,15 +1,17 @@
-import React, {useContext} from 'react';
+import React, { useContext } from "react";
 
-
-import './Header.css';
-import OlxLogo from '../../assets/OlxLogo';
-import Search from '../../assets/Search';
-import Arrow from '../../assets/Arrow';
-import SellButton from '../../assets/SellButton';
-import SellButtonPlus from '../../assets/SellButtonPlus';
-import { AuthContext } from '../../store/Context';
+import "./Header.css";
+import OlxLogo from "../../assets/OlxLogo";
+import Search from "../../assets/Search";
+import Arrow from "../../assets/Arrow";
+import SellButton from "../../assets/SellButton";
+import SellButtonPlus from "../../assets/SellButtonPlus";
+import { AuthContext, FirebaseContext } from "../../store/Context";
+import { useHistory } from "react-router-dom";
 function Header() {
-  const {user} = useContext(AuthContext) 
+  const { user } = useContext(AuthContext);
+  const { firebase } = useContext(FirebaseContext);
+  const history = useHistory();
   return (
     <div className="headerParentDiv">
       <div className="headerChildDiv">
@@ -37,15 +39,32 @@ function Header() {
           <Arrow></Arrow>
         </div>
         <div className="loginPage">
-          <span>{user ? user.displayName : 'Login'}</span>
+          {user ? (
+            <span>{user.displayName}</span>
+          ) : (
+            <a onClick={() => history.push("/login")}>Login</a>
+          )}
           <hr />
         </div>
-        {user && <span>Logout</span>}
+        {user && (
+          <a
+            onClick={() => {
+              firebase.auth().signOut();
+              history.push("/login");
+            }}
+          >
+            Logout
+          </a>
+        )}
         <div className="sellMenu">
           <SellButton></SellButton>
           <div className="sellMenuContent">
             <SellButtonPlus></SellButtonPlus>
-            <span>SELL</span>
+            {user ? (
+              <span onClick={() => history.push("/create")}>SELL</span>
+            ) : (
+              <span onClick={() => history.push("/login")}>SELL</span>
+            )}
           </div>
         </div>
       </div>

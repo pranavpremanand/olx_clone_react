@@ -21,8 +21,14 @@ export default function Signup() {
           phone:phone
         }).then(()=>{
           history.push('/login')
+        }).catch((err)=>{
+          alert(err)
         })
+      }).catch((err)=>{
+        alert(err)
       })
+    }).catch((err)=>{
+      alert(err)
     })
     // console.log(firebase)
   }
@@ -83,7 +89,7 @@ export default function Signup() {
           <br />
           <button>Signup</button>
         </form>
-        <a>Login</a>
+        <a onClick={()=>history.push('/login')}>Login</a>
       </div>
     </div>
   );
