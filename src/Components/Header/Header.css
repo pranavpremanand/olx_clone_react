@@ -162,3 +162,7 @@
     display: none;
   }
 }
+
+svg{
+  cursor: pointer;
+}

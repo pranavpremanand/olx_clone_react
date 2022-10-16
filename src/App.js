@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Signup from "./Pages/Signup";
 import Login from './Pages/Login'
+import ViewPost from './Pages/ViewPost'
 /**
  * ?  =====Import Components=====
  */
@@ -32,6 +33,9 @@ function App() {
         </Route>
         <Route path="/create">
           <Create />
+        </Route>
+        <Route path="/view_details">
+          <ViewPost/>
         </Route>
       </Router>
     </div>
