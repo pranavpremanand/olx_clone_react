@@ -14,8 +14,8 @@ export default function Signup() {
   const handleSubmit = (e)=>{
     e.preventDefault()
     firebase.auth().createUserWithEmailAndPassword(email,password).then((result)=>{
-      result.user.updateProfile({displayName:name}).then(()=>{
-        firebase.firestore().collection('users').add({
+      result.user.updateProfile({displayName:name}).then(async()=>{
+        await firebase.firestore().collection('users').add({
           id:result.user.uid,
           name:name,
           phone:phone
